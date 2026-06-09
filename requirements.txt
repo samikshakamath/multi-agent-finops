@@ -1,0 +1,14 @@
+flask
+pandas
+python-dotenv
+
+langchain
+langchain-openai
+
+langgraph
+
+sqlglot
+
+openai
+
+pytest

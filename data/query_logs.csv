@@ -1,0 +1,11 @@
+query_id,execution_time,cost,query_text
+Q1,45,12.5,"SELECT * FROM sales WHERE YEAR(order_date)=2025"
+Q2,80,25.0,"SELECT * FROM events"
+Q3,12,1.2,"SELECT customer_id FROM customers"
+Q4,120,40.0,"SELECT * FROM orders WHERE MONTH(order_date)=6"
+Q5,95,32.0,"SELECT * FROM transactions"
+Q6,8,0.5,"SELECT id FROM users"
+Q7,150,50.0,"SELECT * FROM sales s JOIN customers c ON s.customer_id=c.customer_id"
+Q8,110,38.0,"SELECT * FROM inventory"
+Q9,75,22.0,"SELECT * FROM products WHERE YEAR(created_at)=2024"
+Q10,5,0.3,"SELECT product_id FROM products"

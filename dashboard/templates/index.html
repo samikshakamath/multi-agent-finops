@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Autonomous FinOps SQL Optimizer</title>
+
+    <style>
+
+        body{
+            font-family: Arial, sans-serif;
+            margin:40px;
+            background:#f8f9fa;
+        }
+
+        h1{
+            color:#333;
+        }
+
+        textarea{
+            width:100%;
+            height:200px;
+            padding:10px;
+            font-size:14px;
+        }
+
+        button{
+            background:#2563eb;
+            color:white;
+            border:none;
+            padding:12px 20px;
+            border-radius:8px;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+        button:hover{
+            background:#1d4ed8;
+        }
+
+        .card{
+            margin-top:20px;
+            padding:20px;
+            background:white;
+            border-radius:10px;
+            box-shadow:0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        pre{
+            background:#f4f4f4;
+            padding:15px;
+            border-radius:8px;
+            overflow-x:auto;
+        }
+
+        .success{
+            color:green;
+            font-weight:bold;
+        }
+
+        .failure{
+            color:red;
+            font-weight:bold;
+        }
+
+        .metric{
+            font-size:20px;
+            font-weight:bold;
+            color:#2563eb;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+        }
+
+        th, td{
+            padding:10px;
+            text-align:left;
+            border:1px solid #ddd;
+        }
+
+        th{
+            background:#2563eb;
+            color:white;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h1>🚀 Autonomous FinOps SQL Optimizer</h1>
+
+<form method="POST">
+
+<textarea name="query">
+SELECT *
+FROM sales
+WHERE YEAR(order_date)=2025
+</textarea>
+
+<br><br>
+
+<button type="submit">
+Optimize Query
+</button>
+
+</form>
+
+{% if result %}
+
+<div class="card">
+
+    <h2>🔍 Issues Found</h2>
+
+    <ul>
+
+        {% for issue in result["issues"] %}
+        <li>{{ issue }}</li>
+        {% endfor %}
+
+    </ul>
+
+</div>
+
+<div class="card">
+
+    <h2>⚡ Optimized Query</h2>
+
+    <pre>{{ result["optimized_query"] }}</pre>
+
+</div>
+
+<div class="card">
+
+    <h2>🎯 Optimization Status</h2>
+
+    {% if result["optimization_status"] == "Optimized Successfully" %}
+
+        <p class="success">
+            ✅ Optimized Successfully
+        </p>
+
+    {% else %}
+
+        <p style="color:orange;font-weight:bold;">
+            ⚠️ No Safe Optimization Available
+        </p>
+
+    {% endif %}
+
+</div>
+
+<div class="card">
+
+    <h2>✅ Validation Status</h2>
+
+    {% if result["validation"]["valid"] %}
+
+        <p class="success">
+            Query Valid
+        </p>
+
+    {% else %}
+
+        <p class="failure">
+            Query Invalid
+        </p>
+
+        <p>
+            {{ result["validation"]["reason"] }}
+        </p>
+
+    {% endif %}
+
+</div>
+
+<div class="card">
+
+    <h2>💰 FinOps Impact</h2>
+
+    <p>
+        Runtime Reduction:
+        <span class="metric">
+            {{ result["savings"]["runtime_reduction_pct"] }}%
+        </span>
+    </p>
+
+    <p>
+        Estimated Cost Savings:
+        <span class="metric">
+            ${{ result["savings"]["estimated_cost_savings"] }}
+        </span>
+    </p>
+
+    <p>
+        New Estimated Cost:
+        <span class="metric">
+            ${{ result["savings"]["new_estimated_cost"] }}
+        </span>
+    </p>
+
+</div>
+
+<div class="card">
+
+    <h2>🤖 Agent Execution Log</h2>
+
+    <ul>
+
+        {% for log in result["logs"] %}
+
+        <li>{{ log }}</li>
+
+        {% endfor %}
+
+    </ul>
+
+</div>
+
+<div class="card">
+
+    <h2>🏆 Top Cost Saving Opportunities</h2>
+
+    <table>
+
+        <tr>
+            <th>Rank</th>
+            <th>Query ID</th>
+            <th>Current Cost</th>
+            <th>Estimated Savings</th>
+        </tr>
+
+        {% for item in opportunities[:5] %}
+
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ item["query_id"] }}</td>
+            <td>${{ item["cost"] }}</td>
+            <td>${{ item["estimated_savings"] }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+{% endif %}
+
+</body>
+
+</html>
